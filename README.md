@@ -1,3 +1,2 @@
-teams_stats
+# teams_stats
 App for analytics of statistics professional teams
-
