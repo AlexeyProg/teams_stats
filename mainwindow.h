@@ -6,6 +6,8 @@
 #include <QMap>
 #include <QDebug>
 #include <QTableWidget>
+#include <QLabel>
+#include <QLineEdit>
 
 #include "requester.h"
 
@@ -29,11 +31,17 @@ private:
     Requester *req;
     Team *team;
 
+    void createFinderLine();
     void createTable();
     QTableWidget *team_table;
     void fillTable(QTableWidget *table, QMap<int,QString> &teams);
+    QLineEdit *line_finder;
+    QLabel *count_label;
+
+    int table_rows;
 
 private slots:
     void takeTeamsData();
+    void find();
 };
 #endif // MAINWINDOW_H
