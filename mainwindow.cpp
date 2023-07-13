@@ -1,23 +1,17 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
-#include <QJsonDocument>
-#include <QJsonArray>
-#include <QJsonValue>
-#include <QJsonObject>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    QNetworkAccessManager *manage = new QNetworkAccessManager(this);
-    connect(manage, SIGNAL(finished(QNetworkReply*)), this, SLOT(showReply(QNetworkReply*)));
-    QUrl url("https://api.opendota.com/api/teams");
-    manage->get(QNetworkRequest(url));
+    req = new Requester();
+    team = req->take_obj();
+    connect(req, SIGNAL(teamsReady()), this, SLOT(takeTeamsData()));
 
-    connect(this,SIGNAL(teamsDataReady(QMap<int, QString>)), this, SLOT(handleTeam_map(QMap<int, QString>)));
-
+    createTable();
 }
 
 MainWindow::~MainWindow()
@@ -25,48 +19,34 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::getTeamId(QString team)
+void MainWindow::createTable()
 {
+    team_table = new QTableWidget(this);
+    team_table->setGeometry(250,50,500,500);
+    team_table->setColumnCount(2);
+    team_table->setColumnWidth(1,250);
 
 }
 
-void MainWindow::accessNetworkManager()
+void MainWindow::fillTable(QTableWidget *table, QMap<int, QString> &teams)
 {
-
-}
-
-void MainWindow::showReply(QNetworkReply *r)
-{
-//    qDebug() << r->readAll();
-    QByteArray response = r->readAll();
-    QJsonDocument jsonResponse = QJsonDocument::fromJson(response);
-
-    //qDebug() << jsonResponse;
-    if(jsonResponse.isArray())
+    int row = 0;
+    int row_count = teams.size();
+    table->setRowCount(row_count);
+    for(auto it = teams.begin(); it != teams.end(); it++)
     {
-        QJsonArray jsonArray = jsonResponse.array();
-        foreach (const QJsonValue &value, jsonArray)
-        {
-            QJsonObject jsonObj = value.toObject();
-            QString team_name = jsonObj["name"].toString();
-            int team_id = jsonObj["team_id"].toInt();
-            mp_teams.insert(team_id,team_name);
-           // qDebug() << team_name << team_id;
-        }
-        emit teamsDataReady(mp_teams);
+        QTableWidgetItem *id = new QTableWidgetItem(it.key());
+        QTableWidgetItem *name = new QTableWidgetItem(it.value());
+        table->setItem(row, 0, id);
+        table->setItem(row, 1, name);
+        ++row;
     }
-
 }
 
-void MainWindow::handleTeam_map(const QMap<int, QString> &mp_teams)
+void MainWindow::takeTeamsData()
 {
-//    for(auto it = mp_teams.begin(); it != mp_teams.end(); ++it)
-//    {
-//        qDebug() << "ID : " << it.key() << " , team name : " << it.value();
-//    }
-    for(auto it = mp_teams.begin(); it != mp_teams.end(); it++)
-    {
+    //qDebug() << team->team_list[2];
 
-    }
+    fillTable(team_table, team->team_list);
 }
 

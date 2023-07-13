@@ -2,11 +2,12 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include <QNetworkAccessManager>
-#include <QNetworkReply>
-#include <QUrl>
+
 #include <QMap>
 #include <QDebug>
+#include <QTableWidget>
+
+#include "requester.h"
 
 
 QT_BEGIN_NAMESPACE
@@ -24,15 +25,15 @@ public:
     QMap<int,QString> mp_teams;
 
 private:
-    void getTeamId(QString team);
     Ui::MainWindow *ui;
+    Requester *req;
+    Team *team;
 
-signals:
-    void teamsDataReady(const QMap<int, QString>& teams);
+    void createTable();
+    QTableWidget *team_table;
+    void fillTable(QTableWidget *table, QMap<int,QString> &teams);
 
-
-public slots:
-    void showReply(QNetworkReply *r);
-    void handleTeam_map(const QMap<int, QString>& mp_teams);
+private slots:
+    void takeTeamsData();
 };
 #endif // MAINWINDOW_H

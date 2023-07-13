@@ -11,10 +11,12 @@ CONFIG += c++17
 SOURCES += \
     main.cpp \
     mainwindow.cpp \
+    requester.cpp \
     team.cpp
 
 HEADERS += \
     mainwindow.h \
+    requester.h \
     team.h
 
 FORMS += \
