@@ -11,6 +11,7 @@ MainWindow::MainWindow(QWidget *parent)
     team = req->take_obj();
     connect(req, SIGNAL(teamsReady()), this, SLOT(takeTeamsData()));
 
+
     createFinderLine();
     createTable();
 }
@@ -36,6 +37,9 @@ void MainWindow::createTable()
     team_table->setGeometry(250,50,500,500);
     team_table->setColumnCount(2);
     team_table->setColumnWidth(1,360);
+    QStringList horHeaders;
+    horHeaders << "team id" << "team name";
+    team_table->setHorizontalHeaderLabels(horHeaders);
 
 }
 
@@ -52,6 +56,7 @@ void MainWindow::fillTable(QTableWidget *table, QMap<int, QString> &teams)
         }
         QTableWidgetItem *id = new QTableWidgetItem(QString::number(it.key()));
         QTableWidgetItem *name = new QTableWidgetItem(it.value());
+        name->setFlags(name->flags() | Qt::ItemIsSelectable);
         table->setItem(row, 0, id);
         table->setItem(row, 1, name);
         ++row;
@@ -62,6 +67,8 @@ void MainWindow::fillTable(QTableWidget *table, QMap<int, QString> &teams)
 void MainWindow::takeTeamsData()
 {
     fillTable(team_table, team->team_list);
+    connect(team_table, SIGNAL(itemDoubleClicked(QTableWidgetItem*)), this, SLOT(teamVote(QTableWidgetItem*)));
+
 }
 
 void MainWindow::find()
@@ -82,5 +89,12 @@ void MainWindow::find()
         }
     }
     count_label->setText(QString(" : %1").arg(count_of_finders));
+}
+
+void MainWindow::teamVote(QTableWidgetItem *item)
+{
+    qDebug() << item->text();
+    Hero *hero = new Hero("qqq",this);
+    hero->show();
 }
 

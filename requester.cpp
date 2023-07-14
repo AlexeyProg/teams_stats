@@ -3,11 +3,11 @@
 Requester::Requester(QObject *parent)
     : QObject{parent}
 {
-    QNetworkAccessManager *manage = new QNetworkAccessManager(this);
+    manage = new QNetworkAccessManager(this);
     connect(manage, SIGNAL(finished(QNetworkReply*)), this, SLOT(showReply(QNetworkReply*)));
     QUrl url("https://api.opendota.com/api/teams");
-    manage->get(QNetworkRequest(url));
-
+    //manage->get(QNetworkRequest(url));
+    get_teams(url);
     team = new Team();
 
     //connect(this,SIGNAL(teamsDataReady(QMap<int, QString>)), this, SLOT(handleTeam_map(QMap<int, QString>)));
@@ -19,10 +19,25 @@ Team* Requester::take_obj()
     return team;
 }
 
+void Requester::get_teams(QUrl &path)
+{
+    QNetworkRequest req(path);
+    req.setAttribute(QNetworkRequest::User, "teams");
+    manage->get(QNetworkRequest(req));
+}
+
+void Requester::get_heroes(QUrl &path)
+{
+    QNetworkRequest req(path);
+    req.setAttribute(QNetworkRequest::User, "heroes");
+    manage->get(QNetworkRequest(req));
+}
 
 void Requester::showReply(QNetworkReply *r)
 {
     //    qDebug() << r->readAll();
+    QString type = r->request().attribute(QNetworkRequest::User).toString();
+
     QByteArray response = r->readAll();
     QJsonDocument jsonResponse = QJsonDocument::fromJson(response);
 
@@ -30,15 +45,28 @@ void Requester::showReply(QNetworkReply *r)
     if(jsonResponse.isArray())
     {
         QJsonArray jsonArray = jsonResponse.array();
-        foreach (const QJsonValue &value, jsonArray)
+        if(type == "teams")
         {
-            QJsonObject jsonObj = value.toObject();
-            QString team_name = jsonObj["name"].toString();
-            int team_id = jsonObj["team_id"].toInt();
-            team->team_list.insert(team_id,team_name);
-            // qDebug() << team_name << team_id;
+            foreach (const QJsonValue &value, jsonArray)
+            {
+                QJsonObject jsonObj = value.toObject();
+                QString team_name = jsonObj["name"].toString();
+                int team_id = jsonObj["team_id"].toInt();
+                team->team_list.insert(team_id,team_name);
+                // qDebug() << team_name << team_id;
+            }
+            emit teamsReady();
         }
-        emit teamsReady();
+//        else if(type == "heroes")
+//        {
+//            foreach (const  QJsonValue &value, jsonArray)
+//            {
+//                QJsonObject obj = value.toObject();
+//                QString name = obj["localized_name"].toString();
+//                int games = obj["games_played"].toInt();
+//                int wins = obj["wins"].toInt();
+//            }
+//        }
     }
 
 }

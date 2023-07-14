@@ -10,6 +10,7 @@
 #include <QLineEdit>
 
 #include "requester.h"
+#include "hero.h"
 
 
 QT_BEGIN_NAMESPACE
@@ -43,5 +44,6 @@ private:
 private slots:
     void takeTeamsData();
     void find();
+    void teamVote(QTableWidgetItem *item);
 };
 #endif // MAINWINDOW_H

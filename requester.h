@@ -14,6 +14,7 @@
 #include <QJsonObject>
 
 #include "team.h"
+#include "hero.h"
 
 
 
@@ -25,6 +26,9 @@ public:
     QMap<int,QString> mp_teams;
     Team *team;
     Team *take_obj();
+    void get_teams(QUrl &path);
+    void get_heroes(QUrl &path);
+    QNetworkAccessManager *manage;
 
 
 signals:
