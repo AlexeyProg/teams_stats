@@ -10,7 +10,7 @@
 #include <QLineEdit>
 
 #include "requester.h"
-#include "hero.h"
+#include "datacontainer.h"
 
 
 QT_BEGIN_NAMESPACE
@@ -30,19 +30,21 @@ public:
 private:
     Ui::MainWindow *ui;
     Requester *req;
-    Team *team;
+    DataContainer *container;
 
     void createFinderLine();
     void createTable();
     QTableWidget *team_table;
-    void fillTable(QTableWidget *table, QMap<int,QString> &teams);
+    void fillTable(QTableWidget *table, QMap<QString, int> &list);
     QLineEdit *line_finder;
     QLabel *count_label;
 
     int table_rows;
+    int current_team_id;
 
 private slots:
     void takeTeamsData();
+    void takeTeamsHeros();
     void find();
     void teamVote(QTableWidgetItem *item);
 };

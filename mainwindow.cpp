@@ -1,6 +1,8 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
+#include <QTextBrowser>
+
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -8,8 +10,9 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
     req = new Requester();
-    team = req->take_obj();
+
     connect(req, SIGNAL(teamsReady()), this, SLOT(takeTeamsData()));
+    connect(req, SIGNAL(heroesReady()), this, SLOT(takeTeamsHeros()));
 
 
     createFinderLine();
@@ -35,40 +38,71 @@ void MainWindow::createTable()
 {
     team_table = new QTableWidget(this);
     team_table->setGeometry(250,50,500,500);
-    team_table->setColumnCount(2);
-    team_table->setColumnWidth(1,360);
+    team_table->setColumnCount(1);
+
+    team_table->setColumnWidth(0,360);
     QStringList horHeaders;
-    horHeaders << "team id" << "team name";
+    horHeaders << "team name";
     team_table->setHorizontalHeaderLabels(horHeaders);
 
 }
 
-void MainWindow::fillTable(QTableWidget *table, QMap<int, QString> &teams)
+void MainWindow::fillTable(QTableWidget *table, QMap<QString, int> &list)
 {
     int row = 0;
-    table_rows = teams.size();
+    table_rows = list.size();
     table->setRowCount(table_rows);
-    for(auto it = teams.begin(); it != teams.end(); it++)
-    {
-        if(it.value().isEmpty())
-        {
-            continue;
-        }
-        QTableWidgetItem *id = new QTableWidgetItem(QString::number(it.key()));
-        QTableWidgetItem *name = new QTableWidgetItem(it.value());
-        name->setFlags(name->flags() | Qt::ItemIsSelectable);
-        table->setItem(row, 0, id);
-        table->setItem(row, 1, name);
-        ++row;
 
+//    for(auto tm : list)
+//    {
+//        if(tm->name.isEmpty())
+//            continue;
+//        QTableWidgetItem *name = new QTableWidgetItem(tm->name);
+//        name->setFlags(name->flags() | Qt::ItemIsSelectable);
+//        table->setItem(row,0,name);
+//        ++row;
+//    }
+    for(auto it = list.begin(); it != list.end(); it++)
+    {
+        if(it.key().isEmpty())
+            continue;
+        QTableWidgetItem *name = new QTableWidgetItem(it.key());
+        name->setFlags(name->flags() | Qt::ItemIsSelectable);
+        table->setItem(row,0,name);
+        ++row;
     }
+
 }
 
 void MainWindow::takeTeamsData()
 {
-    fillTable(team_table, team->team_list);
+    container = req->container;
+//    for(auto item : container->team_list)
+//    {
+//        qDebug() << item->name;       // tut work
+//    }
+    fillTable(team_table, container->team_list);
     connect(team_table, SIGNAL(itemDoubleClicked(QTableWidgetItem*)), this, SLOT(teamVote(QTableWidgetItem*)));
 
+}
+
+void MainWindow::takeTeamsHeros()
+{
+    QString str = "";
+    QTextBrowser *t = new QTextBrowser(this);
+    t->setGeometry(100,200,300,300);
+    QList<Hero*> h = container->heroByTeam.value(current_team_id);
+    for(auto hero : h)
+    {
+        double winrate = hero->wins / hero->games;
+        qDebug() << winrate;
+        str += QString("%1 - games: %2 , wins : %3 (winrate = %4);\n").arg(hero->name,
+                                                         QString::number(hero->games),
+                                                         QString::number(hero->wins),
+                                                         QString::number(winrate));
+    }
+    t->setText(str);
+    t->show();
 }
 
 void MainWindow::find()
@@ -77,7 +111,7 @@ void MainWindow::find()
     int count_of_finders = 0;
     for(int row = 0; row < table_rows; row++)
     {
-        QTableWidgetItem *name = team_table->item(row,1);
+        QTableWidgetItem *name = team_table->item(row,0);
         if(name && name->text().contains(search, Qt::CaseInsensitive))
         {
             team_table->setRowHidden(row, false);
@@ -88,13 +122,22 @@ void MainWindow::find()
             team_table->setRowHidden(row,true);
         }
     }
-    count_label->setText(QString(" : %1").arg(count_of_finders));
+    count_label->setText(QString(" : %1 items").arg(count_of_finders));
 }
 
 void MainWindow::teamVote(QTableWidgetItem *item)
 {
-    qDebug() << item->text();
-    Hero *hero = new Hero("qqq",this);
-    hero->show();
+    QString name = item->text();
+    auto it = container->team_list.find(name);
+    if(it != container->team_list.end())
+    {
+        int id = it.value();
+        current_team_id = id;
+        req->get_heroes(id);
+    }
+    else
+    {
+        qDebug() << "Something is wrong with key searcher";
+    }
 }
 

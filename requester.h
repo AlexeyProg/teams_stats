@@ -13,8 +13,7 @@
 #include <QJsonValue>
 #include <QJsonObject>
 
-#include "team.h"
-#include "hero.h"
+#include "datacontainer.h"
 
 
 
@@ -24,15 +23,19 @@ class Requester : public QObject
 public:
     explicit Requester(QObject *parent = nullptr);
     QMap<int,QString> mp_teams;
-    Team *team;
-    Team *take_obj();
+
+    int mTeamID;
+
     void get_teams(QUrl &path);
-    void get_heroes(QUrl &path);
+    void get_heroes(int id);
     QNetworkAccessManager *manage;
+    DataContainer *container;
+
 
 
 signals:
     void teamsReady();
+    void heroesReady();
 
 public slots:
     void showReply(QNetworkReply *r);
