@@ -8,9 +8,11 @@
 #include <QTableWidget>
 #include <QLabel>
 #include <QLineEdit>
+#include <QPixmap>
 
 #include "requester.h"
-#include "datacontainer.h"
+#include "obj/datacontainer.h"
+#include "teamicon.h"
 
 
 QT_BEGIN_NAMESPACE
@@ -29,6 +31,7 @@ public:
 
 private:
     Ui::MainWindow *ui;
+    TeamIcon *icon;
     Requester *req;
     DataContainer *container;
 
@@ -40,6 +43,8 @@ private:
     QLabel *count_label;
 
     int table_rows;
+
+    QString curr_team_name;
     int current_team_id;
 
 private slots:

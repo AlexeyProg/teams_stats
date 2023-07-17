@@ -1,6 +1,8 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
+//#include "cmath"
+
 #include <QTextBrowser>
 
 
@@ -9,6 +11,9 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    this->setWindowTitle("OpenDota_API");
+    this->setGeometry(0,0,650,600);
+
     req = new Requester();
 
     connect(req, SIGNAL(teamsReady()), this, SLOT(takeTeamsData()));
@@ -17,6 +22,12 @@ MainWindow::MainWindow(QWidget *parent)
 
     createFinderLine();
     createTable();
+
+    QPixmap pix_dota(":/dota2.png");
+    QLabel *logo = new QLabel(this);
+    logo->setPixmap(pix_dota);
+    logo->setFixedSize(pix_dota.size());
+    logo->move(610,5);
 }
 
 MainWindow::~MainWindow()
@@ -37,10 +48,10 @@ void MainWindow::createFinderLine()
 void MainWindow::createTable()
 {
     team_table = new QTableWidget(this);
-    team_table->setGeometry(250,50,500,500);
+    team_table->setGeometry(250,50,340,500);
     team_table->setColumnCount(1);
 
-    team_table->setColumnWidth(0,360);
+    team_table->setColumnWidth(0,300);
     QStringList horHeaders;
     horHeaders << "team name";
     team_table->setHorizontalHeaderLabels(horHeaders);
@@ -53,15 +64,6 @@ void MainWindow::fillTable(QTableWidget *table, QMap<QString, int> &list)
     table_rows = list.size();
     table->setRowCount(table_rows);
 
-//    for(auto tm : list)
-//    {
-//        if(tm->name.isEmpty())
-//            continue;
-//        QTableWidgetItem *name = new QTableWidgetItem(tm->name);
-//        name->setFlags(name->flags() | Qt::ItemIsSelectable);
-//        table->setItem(row,0,name);
-//        ++row;
-//    }
     for(auto it = list.begin(); it != list.end(); it++)
     {
         if(it.key().isEmpty())
@@ -88,21 +90,11 @@ void MainWindow::takeTeamsData()
 
 void MainWindow::takeTeamsHeros()
 {
-    QString str = "";
-    QTextBrowser *t = new QTextBrowser(this);
-    t->setGeometry(100,200,300,300);
+
     QList<Hero*> h = container->heroByTeam.value(current_team_id);
-    for(auto hero : h)
-    {
-        double winrate = hero->wins / hero->games;
-        qDebug() << winrate;
-        str += QString("%1 - games: %2 , wins : %3 (winrate = %4);\n").arg(hero->name,
-                                                         QString::number(hero->games),
-                                                         QString::number(hero->wins),
-                                                         QString::number(winrate));
-    }
-    t->setText(str);
-    t->show();
+
+    icon = new TeamIcon(curr_team_name, h);
+    icon->exec();
 }
 
 void MainWindow::find()
@@ -128,6 +120,7 @@ void MainWindow::find()
 void MainWindow::teamVote(QTableWidgetItem *item)
 {
     QString name = item->text();
+    curr_team_name = name;
     auto it = container->team_list.find(name);
     if(it != container->team_list.end())
     {

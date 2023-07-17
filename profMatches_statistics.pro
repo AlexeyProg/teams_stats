@@ -9,19 +9,21 @@ CONFIG += c++17
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    datacontainer.cpp \
-    hero.cpp \
+    obj/datacontainer.cpp \
+    obj/hero.cpp \
     main.cpp \
     mainwindow.cpp \
     requester.cpp \
-    team.cpp
+    obj/team.cpp \
+    teamicon.cpp
 
 HEADERS += \
-    datacontainer.h \
-    hero.h \
+    obj/datacontainer.h \
+    obj/hero.h \
     mainwindow.h \
     requester.h \
-    team.h
+    obj/team.h \
+    teamicon.h
 
 FORMS += \
     mainwindow.ui
@@ -30,3 +32,6 @@ FORMS += \
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+
+RESOURCES += \
+    img/icons.qrc

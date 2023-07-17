@@ -4,8 +4,6 @@
 #include <QObject>
 
 
-//#include "team.h"
-
 class Hero
 {
 public:

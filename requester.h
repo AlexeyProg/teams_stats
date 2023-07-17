@@ -13,7 +13,7 @@
 #include <QJsonValue>
 #include <QJsonObject>
 
-#include "datacontainer.h"
+#include "obj/datacontainer.h"
 
 
 
@@ -22,7 +22,7 @@ class Requester : public QObject
     Q_OBJECT
 public:
     explicit Requester(QObject *parent = nullptr);
-    QMap<int,QString> mp_teams;
+    //QMap<int,QString> mp_teams;
 
     int mTeamID;
 
