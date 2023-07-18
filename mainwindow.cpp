@@ -1,7 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
-//#include "cmath"
 
 #include <QTextBrowser>
 
@@ -28,6 +27,7 @@ MainWindow::MainWindow(QWidget *parent)
     logo->setPixmap(pix_dota);
     logo->setFixedSize(pix_dota.size());
     logo->move(610,5);
+
 }
 
 MainWindow::~MainWindow()

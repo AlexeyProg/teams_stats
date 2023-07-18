@@ -2,6 +2,126 @@
 <RCC version="1.0">
     <qresource>
         <file>dota2.png</file>
+        <file>Anti-Mage.png</file>
+        <file>Abaddon.png</file>
+        <file>Alchemist.png</file>
+        <file>Ancient Apparition.png</file>
+        <file>Arc Warden.png</file>
+        <file>Axe.png</file>
+        <file>Bane.png</file>
+        <file>Batrider.png</file>
+        <file>Beastmaster.png</file>
+        <file>Bloodseeker.png</file>
+        <file>Bounty Hunter.png</file>
+        <file>Brewmaster.png</file>
+        <file>Bristleback.png</file>
+        <file>Broodmother.png</file>
+        <file>Centaur Warrunner.png</file>
+        <file>Chaos Knight.png</file>
+        <file>Chen.png</file>
+        <file>Clinkz.png</file>
+        <file>Clockwerk.png</file>
+        <file>Crystal Maiden.png</file>
+        <file>Dark Seer.png</file>
+        <file>Dark Willow.png</file>
+        <file>Dawn Breaker.png</file>
+        <file>Dazzle.png</file>
+        <file>Death Prophet.png</file>
+        <file>Disruptor.png</file>
+        <file>Doom.png</file>
+        <file>Dragon Knight.png</file>
+        <file>Drow Ranger.png</file>
+        <file>Earth Spirit.png</file>
+        <file>Earthshaker.png</file>
+        <file>Elder Titan.png</file>
+        <file>Ember Spirit.png</file>
+        <file>Enchantress.png</file>
+        <file>Enigma.png</file>
+        <file>Faceless Void.png</file>
+        <file>Grimstroke.png</file>
+        <file>Gyrocopter.png</file>
+        <file>Huskar.png</file>
+        <file>Io.png</file>
+        <file>Jakiro.png</file>
+        <file>Juggernaut.png</file>
+        <file>Keeper of the Light.png</file>
+        <file>Kunkka.png</file>
+        <file>Legion Commander.png</file>
+        <file>Leshrac.png</file>
+        <file>Lich.png</file>
+        <file>Lifestealer.png</file>
+        <file>Lina.png</file>
+        <file>Lion.png</file>
+        <file>Lone Druid.png</file>
+        <file>Luna.png</file>
+        <file>Lycan.png</file>
+        <file>Magnus.png</file>
+        <file>Marci.png</file>
+        <file>Mars.png</file>
+        <file>Medusa.png</file>
+        <file>Meepo.png</file>
+        <file>Mirana.png</file>
+        <file>Monkey King.png</file>
+        <file>Morphling.png</file>
+        <file>Naga Siren.png</file>
+        <file>Nature's Prophet.png</file>
+        <file>Necrophos.png</file>
+        <file>Nyx Assassin.png</file>
+        <file>Ogre Magi.png</file>
+        <file>Omniknight.png</file>
+        <file>Oracle.png</file>
+        <file>Outworld Destroyer.png</file>
+        <file>Pangolier.png</file>
+        <file>Phantom Assassin.png</file>
+        <file>Phantom Lancer.png</file>
+        <file>Phoenix.png</file>
+        <file>Primal Beast.png</file>
+        <file>Puck.png</file>
+        <file>Pudge.png</file>
+        <file>Pugna.png</file>
+        <file>Queen of Pain.png</file>
+        <file>Razor.png</file>
+        <file>Riki.png</file>
+        <file>Rubick.png</file>
+        <file>Sand King.png</file>
+        <file>Shadow Demon.png</file>
+        <file>Shadow Fiend.png</file>
+        <file>Shadow Shaman.png</file>
+        <file>Silencer.png</file>
+        <file>Skeleton King.png</file>
+        <file>Skywrath Mage.png</file>
+        <file>Slark.png</file>
+        <file>Snapfire.png</file>
+        <file>Sniper.png</file>
+        <file>Spectre.png</file>
+        <file>Spirit Breaker.png</file>
+        <file>Storm Spirit.png</file>
+        <file>Sven.png</file>
+        <file>Techies.png</file>
+        <file>Templar Assassin.png</file>
+        <file>Terrorblade.png</file>
+        <file>Tidehunter.png</file>
+        <file>Timbersaw.png</file>
+        <file>Tinker.png</file>
+        <file>Tiny.png</file>
+        <file>Treant Protector.png</file>
+        <file>Troll Warload.png</file>
+        <file>Tusk.png</file>
+        <file>Underlord.png</file>
+        <file>Undying.png</file>
+        <file>Ursa.png</file>
+        <file>Vengeful Spirit.png</file>
+        <file>Venomancer.png</file>
+        <file>Viper.png</file>
+        <file>Visage.png</file>
+        <file>Void Spirit.png</file>
+        <file>Warlock.png</file>
+        <file>Weaver.png</file>
+        <file>Windranger.png</file>
+        <file>Winter Wyvern.png</file>
+        <file>Witch Doctor.png</file>
+        <file>Wraith King.png</file>
+        <file>Zeus.png</file>
 
         <!-- Добавьте пути к другим картинкам здесь -->
     </qresource>

@@ -2,16 +2,24 @@
 #define HERO_H
 
 #include <QObject>
+#include <QFile>
+#include <QPixmap>
 
 
 class Hero
 {
 public:
-    Hero();
+    Hero(QString mName, int mGames, int mWins);
 
     QString name;
     int games;
     int wins;
+    QString file_path;
+    QPixmap pix;
+
+private:
+    void openImage();
+
 
 };
 

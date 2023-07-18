@@ -6,9 +6,7 @@ Requester::Requester(QObject *parent)
     manage = new QNetworkAccessManager(this);
     connect(manage, SIGNAL(finished(QNetworkReply*)), this, SLOT(showReply(QNetworkReply*)));
     QUrl url("https://api.opendota.com/api/teams");
-    //manage->get(QNetworkRequest(url));
     get_teams(url);
-    //team = new Team();
     container = new DataContainer();
 
 }
@@ -69,10 +67,7 @@ void Requester::showReply(QNetworkReply *r)
                 QString name = obj["localized_name"].toString();
                 int games = obj["games_played"].toInt();
                 int wins = obj["wins"].toInt();
-                Hero *hero =new Hero();
-                hero->name = name;
-                hero->games = games;
-                hero->wins = wins;
+                Hero *hero =new Hero(name,games,wins);
                 list_1.append(hero);
             }
             container->addHeroToTeam(mTeamID,list_1);
