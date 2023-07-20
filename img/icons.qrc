@@ -24,7 +24,7 @@
         <file>Crystal Maiden.png</file>
         <file>Dark Seer.png</file>
         <file>Dark Willow.png</file>
-        <file>Dawn Breaker.png</file>
+        <file>Dawnbreaker.png</file>
         <file>Dazzle.png</file>
         <file>Death Prophet.png</file>
         <file>Disruptor.png</file>
@@ -41,7 +41,9 @@
         <file>Grimstroke.png</file>
         <file>Gyrocopter.png</file>
         <file>Huskar.png</file>
+        <file>Hoodwink.png</file>
         <file>Io.png</file>
+        <file>Invoker.png</file>
         <file>Jakiro.png</file>
         <file>Juggernaut.png</file>
         <file>Keeper of the Light.png</file>
@@ -57,6 +59,7 @@
         <file>Lycan.png</file>
         <file>Magnus.png</file>
         <file>Marci.png</file>
+        <file>Muerta.png</file>
         <file>Mars.png</file>
         <file>Medusa.png</file>
         <file>Meepo.png</file>
@@ -66,6 +69,7 @@
         <file>Naga Siren.png</file>
         <file>Nature's Prophet.png</file>
         <file>Necrophos.png</file>
+        <file>Night Stalker.png</file>
         <file>Nyx Assassin.png</file>
         <file>Ogre Magi.png</file>
         <file>Omniknight.png</file>
@@ -84,6 +88,7 @@
         <file>Riki.png</file>
         <file>Rubick.png</file>
         <file>Sand King.png</file>
+        <file>Slardar.png</file>
         <file>Shadow Demon.png</file>
         <file>Shadow Fiend.png</file>
         <file>Shadow Shaman.png</file>
@@ -105,7 +110,7 @@
         <file>Tinker.png</file>
         <file>Tiny.png</file>
         <file>Treant Protector.png</file>
-        <file>Troll Warload.png</file>
+        <file>Troll Warlord.png</file>
         <file>Tusk.png</file>
         <file>Underlord.png</file>
         <file>Undying.png</file>

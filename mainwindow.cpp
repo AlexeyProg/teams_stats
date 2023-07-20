@@ -11,7 +11,6 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
     this->setWindowTitle("OpenDota_API");
-    this->setGeometry(0,0,650,600);
 
     req = new Requester();
 
@@ -21,13 +20,13 @@ MainWindow::MainWindow(QWidget *parent)
 
     createFinderLine();
     createTable();
+    this->setFixedSize(360,600);
 
     QPixmap pix_dota(":/dota2.png");
     QLabel *logo = new QLabel(this);
     logo->setPixmap(pix_dota);
     logo->setFixedSize(pix_dota.size());
-    logo->move(610,5);
-
+    logo->move(320,5);
 }
 
 MainWindow::~MainWindow()
@@ -38,17 +37,17 @@ MainWindow::~MainWindow()
 void MainWindow::createFinderLine()
 {
     line_finder = new QLineEdit(this);
-    line_finder->setGeometry(290,20,200,20);
+    line_finder->setGeometry(40,20,200,20);
     connect(line_finder, &QLineEdit::returnPressed, this, &MainWindow::find);
 
     count_label = new QLabel(this);
-    count_label->setGeometry(500,20,40,20);
+    count_label->setGeometry(250,20,70,20);
 }
 
 void MainWindow::createTable()
 {
     team_table = new QTableWidget(this);
-    team_table->setGeometry(250,50,340,500);
+    team_table->setGeometry(5,50,340,500);
     team_table->setColumnCount(1);
 
     team_table->setColumnWidth(0,300);

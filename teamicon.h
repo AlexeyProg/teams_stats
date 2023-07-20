@@ -1,4 +1,4 @@
-#ifndef TEAMICON_H
+    #ifndef TEAMICON_H
 #define TEAMICON_H
 
 #include <QDialog>
@@ -19,6 +19,11 @@ private:
     QList<Hero*> heroes;
     QString content;
     QString cur_team_name;
+    QPushButton *sortWinrateButton;
+    QList<QPushButton*> button_list;
+private slots:
+    void sortByWinrate();
+    void openWinrate();
 
 signals:
 
