@@ -5,6 +5,7 @@
 #include <QTextBrowser>
 #include <QLabel>
 #include <QGridLayout>
+#include <QMessageBox>
 
 #include "obj/hero.h"
 
@@ -19,10 +20,8 @@ private:
     QList<Hero*> heroes;
     QString content;
     QString cur_team_name;
-    QPushButton *sortWinrateButton;
     QList<QPushButton*> button_list;
 private slots:
-    void sortByWinrate();
     void openWinrate();
 
 signals:

@@ -8,7 +8,9 @@
 #include <QTableWidget>
 #include <QLabel>
 #include <QLineEdit>
+#include <QMessageBox>
 #include <QPixmap>
+#include <QPushButton>
 
 #include "requester.h"
 #include "obj/datacontainer.h"
@@ -47,10 +49,14 @@ private:
     QString curr_team_name;
     int current_team_id;
 
+    void createContacts();
+    QPushButton *contacts_button;
+
 private slots:
     void takeTeamsData();
     void takeTeamsHeros();
     void find();
     void teamVote(QTableWidgetItem *item);
+    void show_contacts();
 };
 #endif // MAINWINDOW_H

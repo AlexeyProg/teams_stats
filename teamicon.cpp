@@ -6,15 +6,6 @@ TeamIcon::TeamIcon(QString team_name,QList<Hero *> &heroes_list,QWidget *parent)
 {
     this->setWindowTitle(cur_team_name);
     this->setFixedSize(600,770);
-    QLabel *title = new QLabel(this);
-    title->setText(cur_team_name);
-
-
-    QFont font_title = title->font();
-    font_title.setPointSize(32);
-    font_title.setBold(true);
-    title->setFont(font_title);
-    title->setGeometry(0,0,400,30);
 
 
     QGridLayout *layout = new QGridLayout;
@@ -64,28 +55,23 @@ TeamIcon::TeamIcon(QString team_name,QList<Hero *> &heroes_list,QWidget *parent)
     }
 }
 
-void TeamIcon::sortByWinrate()
-{
-
-}
-
 void TeamIcon::openWinrate()
 {
     QString button_nick = sender()->property("butt_name").toString();
-    QDialog *di = new QDialog();
-    di->setGeometry(550,350,200,200);
-    QLabel *l = new QLabel(di);
+//    QDialog *di = new QDialog();
+//    di->setGeometry(550,350,200,200);
+//    QLabel *l = new QLabel(di);
+    QString main_str = "";
     for(Hero *h : heroes)
     {
         if(h->name == button_nick)
         {
-            di->setWindowTitle(h->name);
-            l->setGeometry(0,0,200,200);
             float winrate = std::round(static_cast<float>(h->wins) / h->games * 100.0) / 100.0 * 100;
-            l->setText("Winrate : " + QString::number(winrate) + " %\n" +
+            main_str.append("Hero : " + button_nick + "\n" +
+                       "Winrate : " + QString::number(winrate) + " %\n" +
                        "Games :" + QString::number(h->games) + "\n" +
                        "Wins : " + QString::number(h->wins));
         }
     }
-    di->exec();
+    QMessageBox::information(this, button_nick, main_str, QMessageBox::Ok);
 }
