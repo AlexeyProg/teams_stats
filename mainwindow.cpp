@@ -19,7 +19,7 @@ MainWindow::MainWindow(QWidget *parent)
     createFinderLine();
     createTable();
     line_finder->setStyleSheet("color : red;padding: 3px; background-color: white; border: 1px solid #CCCCCC; border-radius: 3px;");
-    team_table->setStyleSheet("background-color: black; border: 1px solid #CCCCCC;");
+    team_table->setStyleSheet("color : green;background-color: black; border: 1px solid #CCCCCC;");
     count_label->setStyleSheet("font-weight: bold; font-size: 12px; color: #333333;");
     this->setFixedSize(360,600);
 
